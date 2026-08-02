@@ -8,16 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/client": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "lucide-react": "latest"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "tailwindcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "prisma": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
   }
 }
