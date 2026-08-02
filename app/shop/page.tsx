@@ -3,14 +3,24 @@
 import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import SearchBar from "@/components/SearchBar";
+import CategoryFilter from "@/components/CategoryFilter";
 import { products } from "@/data/products";
 
 export default function ShopPage() {
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesCategory =
+      category === "All" ||
+      product.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <main className="bg-gray-50 px-6 py-16">
@@ -26,6 +36,11 @@ export default function ShopPage() {
         <SearchBar
           search={search}
           setSearch={setSearch}
+        />
+
+        <CategoryFilter
+          category={category}
+          setCategory={setCategory}
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
