@@ -3,6 +3,7 @@ import PromoBanner from "@/components/PromoBanner";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import Cart from "@/components/Cart";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <Categories />
       <FeaturedProducts />
+      <Cart />
       <Footer />
     </>
   );
