@@ -3,7 +3,7 @@
 import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
-  const { cart } = useCart();
+  const { cart, openCart } = useCart();
 
   const totalItems = cart.reduce(
     (total, item) => total + item.quantity,
@@ -47,7 +47,10 @@ export default function Navbar() {
             ❤️ Wishlist
           </button>
 
-          <button className="rounded-full border px-4 py-2 hover:bg-gray-100">
+          <button
+            onClick={openCart}
+            className="rounded-full border px-4 py-2 hover:bg-gray-100"
+          >
             🛒 Cart ({totalItems})
           </button>
 
