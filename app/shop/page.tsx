@@ -1,49 +1,5 @@
 import ProductCard from "@/components/ProductCard";
-
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    price: "$89",
-    rating: 4.8,
-    image: "/images/headphones.jpg",
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    price: "$149",
-    rating: 4.7,
-    image: "/images/watch.jpg",
-  },
-  {
-    id: 3,
-    name: "Gaming Mouse",
-    price: "$59",
-    rating: 4.9,
-    image: "/images/mouse.jpg",
-  },
-  {
-    id: 4,
-    name: "Leather Backpack",
-    price: "$99",
-    rating: 4.6,
-    image: "/images/backpack.jpg",
-  },
-  {
-    id: 5,
-    name: "Premium Keyboard",
-    price: "$79",
-    rating: 4.7,
-    image: "/images/keyboard.jpg",
-  },
-  {
-    id: 6,
-    name: "Wireless Speaker",
-    price: "$69",
-    rating: 4.8,
-    image: "/images/speaker.jpg",
-  },
-];
+import { products } from "@/data/products";
 
 export default function ShopPage() {
   return (
