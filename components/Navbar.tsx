@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const { cart, openCart } = useCart();
+  const { user, logout } = useAuth();
 
   const totalItems = cart.reduce(
     (total, item) => total + item.quantity,
@@ -54,9 +57,27 @@ export default function Navbar() {
             🛒 Cart ({totalItems})
           </button>
 
-          <button className="rounded-full bg-black px-5 py-2 text-white hover:bg-yellow-600">
-            👤 Account
-          </button>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-black px-4 py-2 text-white">
+                👤 {user.name}
+              </span>
+
+              <button
+                onClick={logout}
+                className="rounded-full bg-yellow-500 px-4 py-2 font-medium text-black hover:bg-yellow-400"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-full bg-black px-5 py-2 text-white hover:bg-yellow-600"
+            >
+              👤 Account
+            </Link>
+          )}
         </div>
       </div>
     </nav>
