@@ -3,19 +3,30 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    login(email, password);
+    setError("");
+
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      setError("Invalid email or password");
+      return;
+    }
 
     router.push("/");
   };
@@ -23,6 +34,7 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-100 px-6">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+
         <h1 className="text-center text-3xl font-bold text-yellow-600">
           GoldMart
         </h1>
@@ -31,7 +43,17 @@ export default function LoginPage() {
           Sign in to your account
         </p>
 
-        <form onSubmit={handleLogin} className="mt-8 space-y-5">
+        {error && (
+          <p className="mt-4 text-center text-red-500">
+            {error}
+          </p>
+        )}
+
+        <form
+          onSubmit={handleLogin}
+          className="mt-8 space-y-5"
+        >
+
           <div>
             <label className="mb-2 block font-medium">
               Email Address
@@ -46,6 +68,7 @@ export default function LoginPage() {
               className="w-full rounded-lg border px-4 py-3 outline-none focus:border-yellow-500"
             />
           </div>
+
 
           <div>
             <label className="mb-2 block font-medium">
@@ -62,13 +85,16 @@ export default function LoginPage() {
             />
           </div>
 
+
           <button
             type="submit"
             className="w-full rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-yellow-600"
           >
             Login
           </button>
+
         </form>
+
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{" "}
@@ -79,6 +105,7 @@ export default function LoginPage() {
             Create one
           </Link>
         </p>
+
       </div>
     </main>
   );
