@@ -33,9 +33,9 @@ export default function CheckoutPage() {
       JSON.stringify([...oldOrders, order])
     );
 
-    alert("Order placed successfully!");
+    alert("Order created. Continue to payment.");
 
-    router.push("/orders");
+    router.push("/payment");
   };
 
   return (
@@ -77,7 +77,7 @@ export default function CheckoutPage() {
           onClick={placeOrder}
           className="mt-8 w-full rounded-lg bg-black py-3 text-white hover:bg-yellow-600"
         >
-          Place Order
+          Continue to Payment
         </button>
 
       </div>
