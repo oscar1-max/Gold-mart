@@ -8,11 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "latest",
     "@prisma/client": "latest",
+    "bcryptjs": "latest",
+    "lucide-react": "latest",
     "next": "latest",
+    "next-auth": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "lucide-react": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
