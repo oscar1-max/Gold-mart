@@ -1,29 +1,44 @@
+import Image from "next/image";
+
 type ProductCardProps = {
   name: string;
   price: string;
   rating: number;
+  image: string;
 };
 
 export default function ProductCard({
   name,
   price,
   rating,
+  image,
 }: ProductCardProps) {
   return (
-    <div className="rounded-2xl border bg-white p-5 shadow-sm transition hover:shadow-xl">
-      <div className="h-44 rounded-xl bg-gray-200"></div>
+    <div className="overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-xl">
+      <div className="relative h-52 w-full">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover"
+        />
+      </div>
 
-      <h3 className="mt-4 text-lg font-semibold">{name}</h3>
+      <div className="p-5">
+        <h3 className="text-lg font-semibold">{name}</h3>
 
-      <p className="mt-2 text-yellow-600 font-bold">{price}</p>
+        <p className="mt-2 font-bold text-yellow-600">
+          {price}
+        </p>
 
-      <p className="mt-2 text-sm text-gray-500">
-        ⭐ {rating.toFixed(1)} / 5
-      </p>
+        <p className="mt-2 text-sm text-gray-500">
+          ⭐ {rating.toFixed(1)} / 5
+        </p>
 
-      <button className="mt-5 w-full rounded-lg bg-black py-2 text-white hover:bg-yellow-600">
-        Add to Cart
-      </button>
+        <button className="mt-5 w-full rounded-lg bg-black py-2 text-white transition hover:bg-yellow-600">
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 }
