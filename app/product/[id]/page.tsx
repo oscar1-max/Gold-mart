@@ -1,43 +1,5 @@
 import Link from "next/link";
-
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    price: "$89",
-    rating: 4.8,
-    image: "/images/headphones.jpg",
-    description:
-      "Premium wireless headphones with clear sound quality and comfortable design.",
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    price: "$149",
-    rating: 4.7,
-    image: "/images/watch.jpg",
-    description:
-      "A smart watch with modern features for fitness and daily activities.",
-  },
-  {
-    id: 3,
-    name: "Gaming Mouse",
-    price: "$59",
-    rating: 4.9,
-    image: "/images/mouse.jpg",
-    description:
-      "High precision gaming mouse built for smooth performance.",
-  },
-  {
-    id: 4,
-    name: "Leather Backpack",
-    price: "$99",
-    rating: 4.6,
-    image: "/images/backpack.jpg",
-    description:
-      "Stylish leather backpack suitable for work, school, and travel.",
-  },
-];
+import { products } from "@/data/products";
 
 export default async function ProductDetails({
   params,
@@ -72,7 +34,7 @@ export default async function ProductDetails({
   return (
     <main className="bg-gray-50 px-6 py-16">
       <div className="mx-auto grid max-w-6xl gap-10 rounded-2xl bg-white p-8 shadow-lg md:grid-cols-2">
-        
+
         <div>
           <img
             src={product.image}
@@ -106,4 +68,4 @@ export default async function ProductDetails({
       </div>
     </main>
   );
-    }
+}
