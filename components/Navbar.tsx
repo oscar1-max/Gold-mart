@@ -1,31 +1,50 @@
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between border-b px-6 py-4">
-      <h1 className="text-2xl font-bold text-yellow-600">
-        GoldMart
-      </h1>
+    <nav className="sticky top-0 z-50 border-b bg-white">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <h1 className="text-3xl font-bold text-yellow-600">
+          GoldMart
+        </h1>
 
-      <div className="hidden gap-6 md:flex">
-        <a href="#" className="hover:text-yellow-600">
-          Home
-        </a>
+        {/* Navigation Links */}
+        <div className="hidden gap-8 md:flex">
+          <a href="#" className="font-medium hover:text-yellow-600">
+            Home
+          </a>
 
-        <a href="#" className="hover:text-yellow-600">
-          Shop
-        </a>
+          <a href="#" className="font-medium hover:text-yellow-600">
+            Shop
+          </a>
 
-        <a href="#" className="hover:text-yellow-600">
-          Sellers
-        </a>
+          <a href="#" className="font-medium hover:text-yellow-600">
+            Categories
+          </a>
 
-        <a href="#" className="hover:text-yellow-600">
-          Categories
-        </a>
+          <a href="#" className="font-medium hover:text-yellow-600">
+            Sellers
+          </a>
+
+          <a href="#" className="font-medium hover:text-yellow-600">
+            Contact
+          </a>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-3">
+          <button className="rounded-full border px-4 py-2 hover:bg-gray-100">
+            ❤️ Wishlist
+          </button>
+
+          <button className="rounded-full border px-4 py-2 hover:bg-gray-100">
+            🛒 Cart
+          </button>
+
+          <button className="rounded-full bg-black px-5 py-2 text-white hover:bg-yellow-600">
+            👤 Account
+          </button>
+        </div>
       </div>
-
-      <button className="rounded-full bg-black px-5 py-2 text-white hover:bg-yellow-600">
-        Sign In
-      </button>
     </nav>
-  );):
+  );
 }
