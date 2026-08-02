@@ -2,15 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const router = useRouter();
+  const { register } = useAuth();
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
 
-    alert("Login feature will be connected in the next step.");
+    register(name, email, password);
+
+    router.push("/");
   };
 
   return (
@@ -21,10 +29,25 @@ export default function LoginPage() {
         </h1>
 
         <p className="mt-2 text-center text-gray-500">
-          Sign in to your account
+          Create your GoldMart account
         </p>
 
-        <form onSubmit={handleLogin} className="mt-8 space-y-5">
+        <form onSubmit={handleRegister} className="mt-8 space-y-5">
+          <div>
+            <label className="mb-2 block font-medium">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full rounded-lg border px-4 py-3 outline-none focus:border-yellow-500"
+            />
+          </div>
+
           <div>
             <label className="mb-2 block font-medium">
               Email Address
@@ -47,7 +70,7 @@ export default function LoginPage() {
 
             <input
               type="password"
-              placeholder="********"
+              placeholder="Create a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -59,20 +82,20 @@ export default function LoginPage() {
             type="submit"
             className="w-full rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-yellow-600"
           >
-            Login
+            Create Account
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-gray-600">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Link
-            href="/register"
+            href="/login"
             className="font-semibold text-yellow-600 hover:underline"
           >
-            Create one
+            Login
           </Link>
         </p>
       </div>
     </main>
   );
-}
+            }
