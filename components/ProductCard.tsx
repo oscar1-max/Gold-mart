@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
 type ProductCardProps = {
@@ -22,26 +23,32 @@ export default function ProductCard({
 
   return (
     <div className="overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-xl">
-      <div className="relative h-52 w-full">
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="object-cover"
-        />
-      </div>
+      <Link href={`/product/${id}`}>
+        <div className="relative h-52 w-full">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="object-cover"
+          />
+        </div>
 
-      <div className="p-5">
-        <h3 className="text-lg font-semibold">{name}</h3>
+        <div className="p-5">
+          <h3 className="text-lg font-semibold hover:text-yellow-600">
+            {name}
+          </h3>
 
-        <p className="mt-2 font-bold text-yellow-600">
-          {price}
-        </p>
+          <p className="mt-2 font-bold text-yellow-600">
+            {price}
+          </p>
 
-        <p className="mt-2 text-sm text-gray-500">
-          ⭐ {rating.toFixed(1)} / 5
-        </p>
+          <p className="mt-2 text-sm text-gray-500">
+            ⭐ {rating.toFixed(1)} / 5
+          </p>
+        </div>
+      </Link>
 
+      <div className="px-5 pb-5">
         <button
           onClick={() =>
             addToCart({
@@ -51,7 +58,7 @@ export default function ProductCard({
               image,
             })
           }
-          className="mt-5 w-full rounded-lg bg-black py-2 text-white transition hover:bg-yellow-600"
+          className="w-full rounded-lg bg-black py-2 text-white transition hover:bg-yellow-600"
         >
           Add to Cart
         </button>
