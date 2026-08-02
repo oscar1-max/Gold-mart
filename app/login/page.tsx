@@ -2,15 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    alert("Login feature will be connected in the next step.");
+    login(email, password);
+
+    router.push("/");
   };
 
   return (
@@ -75,4 +82,4 @@ export default function LoginPage() {
       </div>
     </main>
   );
-            }
+}
