@@ -15,6 +15,12 @@ type Order = {
   status: string;
 };
 
+const statuses = [
+  "Processing",
+  "Shipped",
+  "Delivered",
+];
+
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -26,6 +32,33 @@ export default function OrdersPage() {
     }
   }, []);
 
+  const updateStatus = (id: number) => {
+    const updatedOrders = orders.map((order) => {
+      if (order.id === id) {
+        const currentIndex = statuses.indexOf(
+          order.status
+        );
+
+        return {
+          ...order,
+          status:
+            statuses[
+              Math.min(currentIndex + 1, 2)
+            ],
+        };
+      }
+
+      return order;
+    });
+
+    setOrders(updatedOrders);
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(updatedOrders)
+    );
+  };
+
   return (
     <main className="bg-gray-100 px-6 py-16">
       <div className="mx-auto max-w-5xl">
@@ -35,10 +68,8 @@ export default function OrdersPage() {
         </h1>
 
         {orders.length === 0 ? (
-          <div className="mt-8 rounded-xl bg-white p-8 shadow">
-            <p className="text-gray-500">
-              No orders yet.
-            </p>
+          <div className="mt-8 rounded-xl bg-white p-8">
+            No orders yet.
           </div>
         ) : (
           <div className="mt-8 space-y-6">
@@ -51,15 +82,14 @@ export default function OrdersPage() {
                   Order #{order.id}
                 </h2>
 
-                <p className="mt-2 text-gray-500">
-                  Date: {order.date}
+                <p className="mt-2">
+                  Status:
+                  <span className="ml-2 font-bold text-yellow-600">
+                    {order.status}
+                  </span>
                 </p>
 
-                <p className="mt-2 font-semibold">
-                  Status: {order.status}
-                </p>
-
-                <div className="mt-4 space-y-2">
+                <div className="mt-4">
                   {order.items.map((item) => (
                     <p key={item.id}>
                       {item.name} × {item.quantity}
@@ -67,9 +97,18 @@ export default function OrdersPage() {
                   ))}
                 </div>
 
-                <p className="mt-5 text-2xl font-bold text-yellow-600">
+                <p className="mt-4 text-xl font-bold">
                   Total: ${order.total.toFixed(2)}
                 </p>
+
+                <button
+                  onClick={() =>
+                    updateStatus(order.id)
+                  }
+                  className="mt-5 rounded-lg bg-black px-5 py-2 text-white hover:bg-yellow-600"
+                >
+                  Update Status
+                </button>
               </div>
             ))}
           </div>
@@ -78,4 +117,4 @@ export default function OrdersPage() {
       </div>
     </main>
   );
-}
+                  }
