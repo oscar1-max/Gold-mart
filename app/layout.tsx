@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "GoldMart | Premium Marketplace",
@@ -18,7 +20,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <Navbar />
+
+            {children}
+
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
