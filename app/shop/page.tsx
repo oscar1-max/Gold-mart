@@ -1,7 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
+import SearchBar from "@/components/SearchBar";
 import { products } from "@/data/products";
 
 export default function ShopPage() {
+  const [search, setSearch] = useState("");
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <main className="bg-gray-50 px-6 py-16">
       <div className="mx-auto max-w-7xl">
@@ -13,8 +23,13 @@ export default function ShopPage() {
           Discover premium products from trusted sellers.
         </p>
 
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+        />
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
