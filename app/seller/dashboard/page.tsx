@@ -3,17 +3,32 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+type Product = {
+  id: number;
+  name: string;
+  price: string;
+  category: string;
+  description: string;
+};
+
 export default function SellerDashboard() {
   const [seller, setSeller] = useState<{
     storeName: string;
     email: string;
   } | null>(null);
 
+  const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
     const savedSeller = localStorage.getItem("seller");
+    const savedProducts = localStorage.getItem("sellerProducts");
 
     if (savedSeller) {
       setSeller(JSON.parse(savedSeller));
+    }
+
+    if (savedProducts) {
+      setProducts(JSON.parse(savedProducts));
     }
   }, []);
 
@@ -27,7 +42,7 @@ export default function SellerDashboard() {
 
           <Link
             href="/seller/register"
-            className="mt-5 inline-block rounded-lg bg-black px-6 py-3 text-white hover:bg-yellow-600"
+            className="mt-5 inline-block rounded-lg bg-black px-6 py-3 text-white"
           >
             Become a Seller
           </Link>
@@ -45,25 +60,57 @@ export default function SellerDashboard() {
             Seller Dashboard
           </h1>
 
-          <div className="mt-6 space-y-3">
-            <p>
-              <strong>Store:</strong> {seller.storeName}
-            </p>
+          <p className="mt-4">
+            <strong>Store:</strong> {seller.storeName}
+          </p>
 
-            <p>
-              <strong>Email:</strong> {seller.email}
-            </p>
-          </div>
+          <p>
+            <strong>Email:</strong> {seller.email}
+          </p>
 
           <Link
             href="/seller/products/add"
-            className="mt-8 inline-block rounded-lg bg-black px-6 py-3 text-white hover:bg-yellow-600"
+            className="mt-6 inline-block rounded-lg bg-black px-6 py-3 text-white hover:bg-yellow-600"
           >
             + Add Product
           </Link>
         </div>
 
+
+        <div className="mt-10 rounded-2xl bg-white p-8 shadow">
+          <h2 className="text-2xl font-bold">
+            My Products
+          </h2>
+
+          {products.length === 0 ? (
+            <p className="mt-4 text-gray-500">
+              No products added yet.
+            </p>
+          ) : (
+            <div className="mt-6 space-y-4">
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="rounded-xl border p-5"
+                >
+                  <h3 className="text-xl font-semibold">
+                    {product.name}
+                  </h3>
+
+                  <p className="text-yellow-600 font-bold">
+                    {product.price}
+                  </p>
+
+                  <p className="text-gray-500">
+                    {product.category}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
       </div>
     </main>
   );
-}
+      }
