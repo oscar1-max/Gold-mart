@@ -4,6 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "GoldMart | Premium Marketplace",
@@ -19,15 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <CartProvider>
-            <Navbar />
+        <Providers>
+          <AuthProvider>
+            <CartProvider>
+              <Navbar />
 
-            {children}
+              {children}
 
-            <Footer />
-          </CartProvider>
-        </AuthProvider>
+              <Footer />
+            </CartProvider>
+          </AuthProvider>
+        </Providers>
       </body>
     </html>
   );
