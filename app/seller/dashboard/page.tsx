@@ -32,6 +32,19 @@ export default function SellerDashboard() {
     }
   }, []);
 
+  const deleteProduct = (id: number) => {
+    const updatedProducts = products.filter(
+      (product) => product.id !== id
+    );
+
+    localStorage.setItem(
+      "sellerProducts",
+      JSON.stringify(updatedProducts)
+    );
+
+    setProducts(updatedProducts);
+  };
+
   if (!seller) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-gray-100 px-6">
@@ -97,13 +110,31 @@ export default function SellerDashboard() {
                     {product.name}
                   </h3>
 
-                  <p className="text-yellow-600 font-bold">
+                  <p className="font-bold text-yellow-600">
                     {product.price}
                   </p>
 
                   <p className="text-gray-500">
                     {product.category}
                   </p>
+
+                  <div className="mt-4 flex gap-3">
+                    <Link
+                      href={`/seller/products/edit/${product.id}`}
+                      className="rounded-lg bg-black px-4 py-2 text-white"
+                    >
+                      Edit
+                    </Link>
+
+                    <button
+                      onClick={() =>
+                        deleteProduct(product.id)
+                      }
+                      className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -113,4 +144,4 @@ export default function SellerDashboard() {
       </div>
     </main>
   );
-      }
+            }
