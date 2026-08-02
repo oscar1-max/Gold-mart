@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 type ProductCardProps = {
+  id: number;
   name: string;
   price: string;
   rating: number;
@@ -8,11 +12,14 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({
+  id,
   name,
   price,
   rating,
   image,
 }: ProductCardProps) {
+  const { addToCart } = useCart();
+
   return (
     <div className="overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-xl">
       <div className="relative h-52 w-full">
@@ -35,7 +42,17 @@ export default function ProductCard({
           ⭐ {rating.toFixed(1)} / 5
         </p>
 
-        <button className="mt-5 w-full rounded-lg bg-black py-2 text-white transition hover:bg-yellow-600">
+        <button
+          onClick={() =>
+            addToCart({
+              id,
+              name,
+              price,
+              image,
+            })
+          }
+          className="mt-5 w-full rounded-lg bg-black py-2 text-white transition hover:bg-yellow-600"
+        >
           Add to Cart
         </button>
       </div>
