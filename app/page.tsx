@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <Cart />
       <PromoBanner />
       <Hero />
       <Categories />
       <FeaturedProducts />
-      <Cart />
       <Footer />
     </>
   );
