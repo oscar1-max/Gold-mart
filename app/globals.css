@@ -3,25 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #111111;
+  --gold: #eab308;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+body {
+  background: #f9fafb;
+  color: #111827;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 button {
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
